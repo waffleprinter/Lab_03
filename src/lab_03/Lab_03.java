@@ -17,17 +17,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
  *
- * @author Jacques-Conrad Calagui-Painchaud
+ * @author Jacques-Conrad Calagui-Painchaud 6298805
+ * 2025/09/17
  * https://github.com/waffleprinter/Lab_03.git
  */
 public class Lab_03 extends Application {
-    // Belongs to class to let handler have access
+    // Variables global scope to class to let handler have access
     Button register;
     
     TextField firstNameField;
@@ -79,7 +78,7 @@ public class Lab_03 extends Application {
         
         // ----BUTTONS----
         register = new Button("Register");
-        register.setDisable(true);
+        register.setDisable(true); // Button requires all fields to be filled
         grid.add(register, 0, 4);
         
         Label loginStatus = new Label();
