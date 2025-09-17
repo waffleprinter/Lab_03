@@ -6,6 +6,7 @@ package lab_03;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -25,6 +27,13 @@ import javafx.stage.Stage;
  * https://github.com/waffleprinter/Lab_03.git
  */
 public class Lab_03 extends Application {
+    Button register;
+    
+    TextField firstNameField;
+    TextField lastNameField;
+    TextField emailField;
+    PasswordField passwordField;
+    
     public static void main(String[] args) {
         launch(args);
     }
@@ -45,27 +54,31 @@ public class Lab_03 extends Application {
         // ----INPUT FIELDS----
         Label firstName = new Label("First Name:");
         grid.add(firstName, 0, 0);
-        TextField firstNameField = new TextField();
+        firstNameField = new TextField();
+        firstNameField.setOnKeyPressed(new FieldUpdateHandler());
         grid.add(firstNameField, 1, 0);
         
         Label lastName = new Label("Last Name:");
         grid.add(lastName, 0, 1);
-        TextField lastNameField = new TextField();
+        lastNameField = new TextField();
+        lastNameField.setOnKeyPressed(new FieldUpdateHandler());
         grid.add(lastNameField, 1, 1);
         
         Label email = new Label("Email:");
         grid.add(email, 0, 2);
-        TextField emailField = new TextField();
+        emailField = new TextField();
+        emailField.setOnKeyPressed(new FieldUpdateHandler());
         grid.add(emailField, 1, 2);
         
         Label password = new Label("Password:");
         grid.add(password, 0, 3);
-        PasswordField passwordField = new PasswordField();
+        passwordField = new PasswordField();
+        passwordField.setOnKeyPressed(new FieldUpdateHandler());
         grid.add(passwordField, 1, 3);
         
         // ----BUTTONS----
-        Button register = new Button("Register");
-        register.setDisable(false);
+        register = new Button("Register");
+        register.setDisable(true);
         grid.add(register, 0, 4);
         
         Label loginStatus = new Label();
@@ -114,5 +127,19 @@ public class Lab_03 extends Application {
         
         stage.setTitle("User Registration Form");
         stage.show();
+    }
+    
+    class FieldUpdateHandler implements EventHandler<KeyEvent> {
+        @Override
+        public void handle(KeyEvent t) {
+            boolean firstNameFilled = !firstNameField.getText().isEmpty();
+            boolean lastNameFilled = !lastNameField.getText().isEmpty();
+            boolean emailFilled = !emailField.getText().isEmpty();
+            boolean passwordFilled = !passwordField.getText().isEmpty();
+            
+            if (firstNameFilled && lastNameFilled && emailFilled && passwordFilled) {
+                register.setDisable(false);
+            }
+        }
     }
 }
