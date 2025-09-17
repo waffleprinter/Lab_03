@@ -27,6 +27,7 @@ import javafx.stage.Stage;
  * https://github.com/waffleprinter/Lab_03.git
  */
 public class Lab_03 extends Application {
+    // Belongs to class to let handler have access
     Button register;
     
     TextField firstNameField;
