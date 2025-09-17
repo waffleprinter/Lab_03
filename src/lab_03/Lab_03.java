@@ -31,6 +31,7 @@ public class Lab_03 extends Application {
     
     @Override
     public void start(Stage stage) {
+        // ----STRUCTURE-----
         BorderPane root = new BorderPane();
         
         GridPane grid = new GridPane();
@@ -41,6 +42,7 @@ public class Lab_03 extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
         
+        // ----INPUT FIELDS----
         Label firstName = new Label("First Name:");
         grid.add(firstName, 0, 0);
         TextField firstNameField = new TextField();
@@ -61,15 +63,29 @@ public class Lab_03 extends Application {
         PasswordField passwordField = new PasswordField();
         grid.add(passwordField, 1, 3);
         
+        // ----BUTTONS----
         Button register = new Button("Register");
         register.setDisable(false);
         grid.add(register, 0, 4);
         
-        Text loginStatus = new Text();
+        Label loginStatus = new Label();
         grid.add(loginStatus, 0, 5);
         
         register.setOnAction((ActionEvent t) -> {
-            boolean validEmail = emailField.getText().contains("@");
+            int atSymbols = 0;
+            int periodsAfterAtSymbol = 0;
+            
+            for (char c : emailField.getText().toCharArray()) {
+                if (c == '@') {
+                    atSymbols++;
+                } else if (atSymbols > 0 && c == '.') {
+                    periodsAfterAtSymbol++;
+                }
+            }
+            
+            // Professor said that a domain is valid iff it contains exactly one
+            // period after the '@' symbol.
+            boolean validEmail = atSymbols == 1 && periodsAfterAtSymbol == 1;
             
             boolean passwordContainsLetter = passwordField.getText().matches(".*[a-zA-Z].*");
             boolean passwordContainsNumber = passwordField.getText().matches(".*[0-9].*");
@@ -92,6 +108,7 @@ public class Lab_03 extends Application {
             passwordField.setText("");
         });
         
+        // ----SHOW SCENE----
         Scene scene = new Scene(root, 300, 275);
         stage.setScene(scene);
         
