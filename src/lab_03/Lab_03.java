@@ -4,17 +4,21 @@
  */
 package lab_03;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 /**
  *
- * @author 6298805
+ * @author Jacques-Conrad Calagui-Painchaud
+ * https://github.com/waffleprinter/Lab_03.git
  */
-public class Lab_03 {
-
-    /**
-     * @param args the command line arguments
-     */
+public class Lab_03 extends Application {
     public static void main(String[] args) {
-        // TODO code application logic here
+        launch(args);
     }
     
+    public void start(Stage stage) {
+        stage.setTitle("Hello!");
+        stage.show();
+    }
 }
